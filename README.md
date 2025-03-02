@@ -40,7 +40,7 @@ O projeto segue os princípios da Clean Architecture:
 
 1. Clone o repositório:
 ```bash
-git clone 
+git clone https://github.com/LucasPaz-7/Api-Go.git
 cd ApiGo
 ```
 
@@ -149,11 +149,10 @@ docker-compose build --no-cache
 
 ## 📝 Licença
 
-Este projeto está sob a licença MIT. Veja o arquivo `LICENSE` para mais detalhes.
+Este projeto está sob a licença MIT.
 
 ## 📫 Contato
 
 Para questões e sugestões, por favor abra uma issue no repositório.
 
 ---
-⌨️ com ❤️ por [Seu Nome] 
