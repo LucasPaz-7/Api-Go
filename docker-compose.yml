@@ -1,0 +1,49 @@
+version: '3.9'
+
+services:
+  go_app:
+    container_name: go_app
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      go_db:
+        condition: service_healthy
+    environment:
+      DB_HOST: go_db
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASSWORD: 1234
+      DB_NAME: postgres
+    restart: unless-stopped
+    networks:
+      - go_network
+
+  go_db:
+    container_name: go_db
+    image: postgres:12-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: postgres
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    restart: unless-stopped
+    networks:
+      - go_network
+
+volumes:
+  pgdata:
+    driver: local
+
+networks:
+  go_network:
+    driver: bridge
